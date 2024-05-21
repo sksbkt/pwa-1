@@ -17,7 +17,6 @@ export default function swDev() {
   var vapidPublicKey =
     "BDrSZE2Nkgskqgadya2Ch_wIqUZ1apYk5D7QqfZgu_-D-2bfzrtOFypt_YdJF1UnmTEkZotw3zubAWafufUZ8sc";
   function determineAppServerKey() {
-    console.log(vapidPublicKey);
     return urlBase64ToUint8Array(vapidPublicKey);
   }
 
@@ -25,7 +24,6 @@ export default function swDev() {
   navigator.serviceWorker.register(swURL).then((response) => {
     // console.warn("response");
     return response.pushManager.getSubscription().then(function (subscription) {
-      console.log("KEY", determineAppServerKey());
       return response.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: determineAppServerKey(),

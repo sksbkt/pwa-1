@@ -18,7 +18,13 @@ this.addEventListener("install", (event) => {
 });
 
 this.addEventListener("fetch", (event) => {
+  console.warn("url", event.request.url);
   if (!navigator.onLine) {
+    event.waitUntil(
+      this.registration.showNotification("No connection", {
+        body: "No internet connection",
+      })
+    );
     event.respondWith(
       caches.match(event.request).then((resp) => {
         if (resp) {
